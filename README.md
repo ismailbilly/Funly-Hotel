@@ -1,7 +1,7 @@
-#Hotel Booking App
+# Hotel Booking App
 Built with Tyescript, React and Mongodb
 
-#Features
+# Features
 Best Practice Error handling
 Rate Limiting
 Testing
