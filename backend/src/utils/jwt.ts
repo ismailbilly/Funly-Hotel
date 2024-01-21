@@ -1,15 +1,16 @@
 import jwt from "jsonwebtoken";
+
 export function signJwt(object:Object, secret: string, options?: jwt.SignOptions | undefined) {
     return jwt.sign(object, secret, { ...(options && options) }
     );
 }
 
 
-export function verifyJwt(token: string, secret: string) {
+export function verifyJwt(token: string, secret=process.env.JWT_SECRET_KEY as string) {
 
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY as string);
+    const decoded = jwt.verify(token, secret);
     return {
       valid: true,
       expired: false,

@@ -1,13 +1,14 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import "dotenv/config";
+import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes";
 import authRoutes from "./routes/authRoutes";
 import { dbConnect, dbDisconnect } from "./config/dbConnect";
 import swaggerDocs from "./utils/swagger";
 import { errorHandler } from "./middlewares/errorHandler";
 import { Api404Error } from "./utils/error";
-//mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

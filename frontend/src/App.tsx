@@ -1,5 +1,5 @@
 
-import { BrowserRouter as Router, Routes, Route, NavLink, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
 import Layout from './layouts/Layouts'
 import Register from './pages/Register';

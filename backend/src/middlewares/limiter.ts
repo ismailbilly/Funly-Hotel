@@ -9,5 +9,3 @@ const createLimiter = (windowMs:number, max:number, message:string) => {
   });
 };
 export const signUpSignInLimiter = createLimiter(10 * 60 * 1000, 100, MESSAGE);
-
-//social Echo
