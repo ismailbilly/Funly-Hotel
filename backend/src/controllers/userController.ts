@@ -26,7 +26,9 @@ export const register = async (req: Request<{}, {}, CreateUserInput["body"]>, re
            process.env.JWT_SECRET_KEY as string,
            { expiresIn: process.env.JWT_EXPIRES as string }
          );
-       
+       console.log('====================================');
+       console.log(token);
+       console.log('====================================');
          res.cookie("auth_token", token, {
            httpOnly: true,
            secure: process.env.NODE_ENV === "production",

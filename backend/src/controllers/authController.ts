@@ -37,7 +37,7 @@ export const login = async (req: Request<{}, {}, CreateLoginInput["body"]>, res:
     }
 }
 
-export const authhandle = (req: Request, res: Response) => {
+export const authHandle = (req: Request, res: Response) => {
   res.status(200).send({ userId: res.locals.userId })
 
 

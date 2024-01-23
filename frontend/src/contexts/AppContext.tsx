@@ -1,13 +1,13 @@
 import React, { ReactNode, createContext, useContext } from "react";
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
-type ToastMessage = {
-    message: string;
-    type: "SUCCESS"  | "ERROR"
-}
+// type ToastMessage = {
+//     message: string;
+//     type: "SUCCESS"  | "ERROR"
+// }
 
 type AppContext = {
-  showToast: (toastMessage: ToastMessage) => void;
+ // showToast: (toastMessage: ToastMessage) => void;
   isLoggedIn: boolean
 };
 const AppContext = React.createContext<AppContext | undefined>(undefined)
@@ -19,9 +19,9 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
   return (
     <AppContext.Provider
       value={{
-        showToast: (toastMessage) => {
-          console.log(toastMessage);
-        },
+        // showToast: (toastMessage) => {
+        //   console.log(toastMessage);
+        // },
         isLoggedIn: !isError,
       }}
     >

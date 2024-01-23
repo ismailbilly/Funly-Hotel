@@ -14,8 +14,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 let corsOptions = {
   origin: "http://localhost:5173",
+  credentials: true
 };
 app.use(cors(corsOptions));
+app.use(cookieParser())
 swaggerDocs(app);
 /**
  * @swagger
@@ -32,7 +34,8 @@ app.get("/api/test", async (req: Request, res: Response) => {
 //Routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
-app.all("*", async (req, res, next) =>
+
+app.get("*", async (req, res, next) =>
   next(new Api404Error("It seems you got lost"))
 );
 app.use(errorHandler);

@@ -1,9 +1,10 @@
 
 import {useForm} from 'react-hook-form'
-import { useMutation } from "react-query"
+import { useMutation, useQueryClient } from "react-query"
 import * as apiClient from '../api-client'
 //import { useAppContext } from '../contexts/AppContext';
 import { successToast,  ErrorToast} from "../utils/notifications";
+import { useNavigate } from 'react-router-dom';
 //import toast from 'react-hot-toast';
 export type RegisterFormData = {
   firstName: string;
@@ -14,24 +15,29 @@ export type RegisterFormData = {
 };
 
 const Register = () => {
- // const {showToast} = useAppContext()
-    const { register, watch, handleSubmit, formState: { errors } } = useForm<RegisterFormData>();
-    const mutation = useMutation(apiClient.register,
-        {
-          onSuccess: () => {
-           successToast("registration successful");
-            // showToast({ message: "registration successful" , type : "SUCCESS"});
-           
-          }, onError: (error: Error) => {
-          ErrorToast( error.message,);
-             console.log(error.message);
-                
-        }
-    })
+  const queryClient = useQueryClient()
+  const navigate = useNavigate();
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormData>();
+  const mutation = useMutation(apiClient.register, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("validationToken") // this invalidates the token and set isLoggenIn to false so our page can reload on redirect
+      successToast("registration successful");
+     navigate('/')
+    },
+    onError: (error: Error) => {
+      ErrorToast(error.message);
+      console.log(error.message);
+    },
+  });
 
-    const onSubmit = handleSubmit((data: RegisterFormData) => {
-      mutation.mutate(data)
-    });
+  const onSubmit = handleSubmit((data: RegisterFormData) => {
+    mutation.mutate(data);
+  });
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold">Create an Account</h2>
